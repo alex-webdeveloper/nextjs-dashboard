@@ -1,6 +1,100 @@
+import { lusitana } from '@/app/ui/fonts';
 // Loading animation
 const shimmer =
   'before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_2s_infinite] before:bg-gradient-to-r before:from-transparent before:via-white/60 before:to-transparent';
+
+export function CustomersSkeleton() {
+  return (
+    <div className="w-full">
+      {/* Заголовок */}
+      <h1 className={`${lusitana.className} mb-8 text-xl md:text-2xl`}>
+        Customers
+      </h1>
+
+      {/* Фейковое поле поиска */}
+      <div className="relative mb-4 w-full max-w-sm animate-pulse">
+        <div className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 rounded bg-gray-300" />
+        <div className="h-10 w-full rounded-md bg-gray-100 pl-10" />
+      </div>
+
+      {/* Список скелетонов */}
+      <div className="mt-6 flow-root">
+        <div className="overflow-x-auto">
+          <div className="inline-block min-w-full align-middle">
+            <div className="overflow-hidden rounded-md bg-gray-50 p-2 md:pt-0">
+              {/* Mobile view */}
+              <div className="md:hidden">
+                {Array.from({ length: 4 }).map((_, i) => (
+                  <div
+                    key={`mobile-${i}`}
+                    className="mb-2 w-full animate-pulse rounded-md bg-white p-4"
+                  >
+                    <div className="flex items-center justify-between border-b pb-4">
+                      <div>
+                        <div className="mb-2 flex items-center gap-3">
+                          <div className="h-7 w-7 rounded-full bg-gray-200" />
+                          <div className="h-4 w-24 rounded bg-gray-200" />
+                        </div>
+                        <div className="h-3 w-36 rounded bg-gray-100" />
+                      </div>
+                    </div>
+                    <div className="flex w-full justify-between border-b py-5">
+                      <div className="w-1/2">
+                        <div className="h-3 w-20 rounded bg-gray-100 mb-2" />
+                        <div className="h-4 w-16 rounded bg-gray-200" />
+                      </div>
+                      <div className="w-1/2">
+                        <div className="h-3 w-20 rounded bg-gray-100 mb-2" />
+                        <div className="h-4 w-16 rounded bg-gray-200" />
+                      </div>
+                    </div>
+                    <div className="pt-4">
+                      <div className="h-3 w-24 rounded bg-gray-100" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Desktop table */}
+              <table className="hidden min-w-full text-gray-900 md:table">
+                <thead className="rounded-md bg-gray-50 text-left text-sm font-normal">
+                  <tr>
+                    <th className="px-4 py-5 sm:pl-6">Name</th>
+                    <th className="px-3 py-5">Email</th>
+                    <th className="px-3 py-5">Total Invoices</th>
+                    <th className="px-3 py-5">Total Pending</th>
+                    <th className="px-4 py-5">Total Paid</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-200">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <tr key={`row-${i}`} className="animate-pulse bg-white">
+                      <td className="px-4 py-5">
+                        <div className="h-4 w-full rounded bg-gray-100" />
+                      </td>
+                      <td className="px-4 py-5">
+                        <div className="h-4 w-full rounded bg-gray-100" />
+                      </td>
+                      <td className="px-4 py-5">
+                        <div className="h-4 w-full rounded bg-gray-100" />
+                      </td>
+                      <td className="px-4 py-5">
+                        <div className="h-4 w-full rounded bg-gray-100" />
+                      </td>
+                      <td className="px-4 py-5">
+                        <div className="h-4 w-full rounded bg-gray-100" />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export function CardSkeleton() {
   return (
@@ -21,10 +115,9 @@ export function CardSkeleton() {
 export function CardsSkeleton() {
   return (
     <>
-      <CardSkeleton />
-      <CardSkeleton />
-      <CardSkeleton />
-      <CardSkeleton />
+      {Array.from({ length: 4 }).map((_, i) => (
+        <CardSkeleton key={i} />
+      ))}
     </>
   );
 }
@@ -67,11 +160,9 @@ export function LatestInvoicesSkeleton() {
       <div className="mb-4 h-8 w-36 rounded-md bg-gray-100" />
       <div className="flex grow flex-col justify-between rounded-xl bg-gray-100 p-4">
         <div className="bg-white px-6">
-          <InvoiceSkeleton />
-          <InvoiceSkeleton />
-          <InvoiceSkeleton />
-          <InvoiceSkeleton />
-          <InvoiceSkeleton />
+          {Array.from({ length: 5 }).map((_, i) => (
+            <InvoiceSkeleton key={i} />
+          ))}
         </div>
         <div className="flex items-center pb-2 pt-6">
           <div className="h-5 w-5 rounded-full bg-gray-200" />
@@ -89,10 +180,9 @@ export default function DashboardSkeleton() {
         className={`${shimmer} relative mb-4 h-8 w-36 overflow-hidden rounded-md bg-gray-100`}
       />
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        <CardSkeleton />
-        <CardSkeleton />
-        <CardSkeleton />
-        <CardSkeleton />
+        {Array.from({ length: 4 }).map((_, i) => (
+          <CardSkeleton key={i} />
+        ))}
       </div>
       <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
         <RevenueChartSkeleton />
@@ -169,12 +259,9 @@ export function InvoicesTableSkeleton() {
       <div className="inline-block min-w-full align-middle">
         <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
           <div className="md:hidden">
-            <InvoicesMobileSkeleton />
-            <InvoicesMobileSkeleton />
-            <InvoicesMobileSkeleton />
-            <InvoicesMobileSkeleton />
-            <InvoicesMobileSkeleton />
-            <InvoicesMobileSkeleton />
+            {Array.from({ length: 6 }).map((_, i) => (
+              <InvoicesMobileSkeleton key={i} />
+            ))}
           </div>
           <table className="hidden min-w-full text-gray-900 md:table">
             <thead className="rounded-lg text-left text-sm font-normal">
@@ -203,12 +290,9 @@ export function InvoicesTableSkeleton() {
               </tr>
             </thead>
             <tbody className="bg-white">
-              <TableRowSkeleton />
-              <TableRowSkeleton />
-              <TableRowSkeleton />
-              <TableRowSkeleton />
-              <TableRowSkeleton />
-              <TableRowSkeleton />
+              {Array.from({ length: 6 }).map((_, i) => (
+                <TableRowSkeleton key={i} />
+              ))}
             </tbody>
           </table>
         </div>

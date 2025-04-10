@@ -19,7 +19,6 @@ const links = [
     icon: DocumentDuplicateIcon,
   },
   { name: 'Customers', href: '/dashboard/customers', icon: UserGroupIcon },
-  { name: 'Check', href: '/dashboard/check', icon: UserGroupIcon },
 ];
 
 export default function NavLinks() {
@@ -41,7 +40,7 @@ export default function NavLinks() {
             )}
           >
             <LinkIcon className="w-6" />
-            <p className="hidden md:block">{link.name}</p>
+              <p className="hidden md:block">{link.name}</p>
           </Link>
         );
       })}

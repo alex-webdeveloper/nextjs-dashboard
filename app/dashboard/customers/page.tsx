@@ -1,43 +1,33 @@
+import { fetchFilteredCustomers } from '@/app/lib/data';
+import CustomersTable from '@/app/ui/customers/table';
 import { Metadata } from 'next';
-import { listCard } from '@/app/lib/utils';
-import { cacheFn } from '@/app/lib/utils';
-import { Card } from '@/app/ui/dashboard/cards';
-import Button from './button';
-
+import { lusitana } from '@/app/ui/fonts';
+import Search from '@/app/ui/search';
 
 export const metadata: Metadata = {
-	title: 'Customers',
+  title: 'Customers',
 };
 
-export default function Page() {
-	// const {
-	// 	numberOfInvoices,
-	// 	numberOfCustomers,
-	// 	totalPaidInvoices,
-	// 	totalPendingInvoices,
-	// } = await listCard();
-	return (
-		<>
-			<p>Customers Page</p>
-			<p>{cacheFn('hello from cache')}</p>
-			{/* <button onClick={() => setShow(!show)}>Show</button> */}
-			{/* <Button totalPaidInvoices={totalPaidInvoices} /> */}
-			{/* <Card
-				title="Collected"
-				value={totalPaidInvoices}
-				type="collected"
-			/>
-			<Card title="Pending" value={totalPendingInvoices} type="pending" />
-			<Card
-				title="Total Invoices"
-				value={numberOfInvoices}
-				type="invoices"
-			/>
-			<Card
-				title="Total Customers"
-				value={numberOfCustomers}
-				type="customers"
-			/> */}
-		</>
-	);
+export default async function Page(props: {
+  searchParams?: Promise<{
+    query?: string;
+    page?: string;
+  }>;
+}) {
+  const searchParams = await props.searchParams;
+  const query = searchParams?.query || '';
+
+  const customers = await fetchFilteredCustomers(query);
+
+  return (
+    <main>
+      <div className="w-full">
+        <h1 className={`${lusitana.className} mb-8 text-xl md:text-2xl`}>
+          Customers
+        </h1>
+        <Search placeholder="Search customers..." />
+        <CustomersTable customers={customers} />
+      </div>
+    </main>
+  );
 }

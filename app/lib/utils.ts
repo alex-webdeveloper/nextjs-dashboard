@@ -9,7 +9,7 @@ export const listCard = unstable_cache(async () => {
 });
 
 export const cacheFn = cache(async (str: string) => {
-  await new Promise((resolve) => setTimeout(resolve, 3000));
+  // await new Promise((resolve) => setTimeout(resolve, 3000));
   return str;
 });
 
