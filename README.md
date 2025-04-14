@@ -1,8 +1,8 @@
 ## Next.js App Router Course - Starter
+nextjs-dashboard [DEMO](https://nextjs-dashboard-black-eta-51.vercel.app/dashboard) 
+Login: user@nextmail.com
+Password: 123456
 
-This is the starter template for the Next.js App Router Course. It contains the starting code for the dashboard application.
-
-For more information, see the [course curriculum](https://nextjs.org/learn) on the Next.js Website.
 openssl rand -base64 32 // generate key
 https://vercel.com/docs/projects/environment-variables
 https://authjs.dev/getting-started/providers/credentials
