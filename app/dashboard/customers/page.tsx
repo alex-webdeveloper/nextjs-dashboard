@@ -3,7 +3,6 @@ import CustomersTable from '@/app/ui/customers/table';
 import { Metadata } from 'next';
 import { lusitana } from '@/app/ui/fonts';
 import Search from '@/app/ui/search';
-import { unstable_cache } from 'next/cache';
 
 export const metadata: Metadata = {
   title: 'Customers',
@@ -18,7 +17,6 @@ export default async function Page(props: {
   const searchParams = await props.searchParams;
   const query = searchParams?.query || '';
 
-  // const customers = unstable_cache(async() => await fetchFilteredCustomers(query));
   const customers =  await fetchFilteredCustomers(query);
 
   return (
