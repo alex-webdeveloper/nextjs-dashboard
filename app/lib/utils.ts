@@ -1,17 +1,5 @@
 import { Revenue } from './definitions';
-import { fetchCardData } from '@/app/lib/data';
-import { cache } from 'react';
-import { unstable_cache } from 'next/cache';
 
-export const listCard = unstable_cache(async () => {
-  const item = await fetchCardData();
-  return item;
-});
-
-export const cacheFn = cache(async (str: string) => {
-  // await new Promise((resolve) => setTimeout(resolve, 3000));
-  return str;
-});
 
 export const formatCurrency = (amount: number) => {
   return (amount / 100).toLocaleString('en-US', {

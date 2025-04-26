@@ -8,6 +8,7 @@ import {
   Revenue,
 } from './definitions';
 import { formatCurrency } from './utils';
+import { unstable_cache } from 'next/cache';
 
 export async function fetchRevenue(){
   try {
@@ -59,7 +60,6 @@ export async function fetchCardData() {
          SUM(CASE WHEN status = 'paid' THEN amount ELSE 0 END) AS "paid",
          SUM(CASE WHEN status = 'pending' THEN amount ELSE 0 END) AS "pending"
          FROM invoices`;
-         await new Promise((resolve) => setTimeout(resolve, 3000));
     const data = await Promise.all([
       invoiceCountPromise,
       customerCountPromise,
@@ -183,7 +183,8 @@ export async function fetchCustomers() {
   }
 }
 
-export async function fetchFilteredCustomers(query: string) {
+export const fetchFilteredCustomers = unstable_cache(async (query: string) => {
+
   try {
     const data = await sql<CustomersTableType>`
 		SELECT
@@ -214,4 +215,4 @@ export async function fetchFilteredCustomers(query: string) {
     console.error('Database Error:', err);
     throw new Error('Failed to fetch customer table.');
   }
-}
+})
