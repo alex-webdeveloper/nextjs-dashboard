@@ -1,5 +1,5 @@
 ## Next.js App Router Course - Starter
-nextjs-dashboard [DEMO](https://nextjs-dashboard-black-eta-51.vercel.app/dashboard) 
+nextjs-dashboard [DEMO](https://nextjs-dashboard-black-eta-51.vercel.app) 
 Login: user@nextmail.com
 Password: 123456
 
